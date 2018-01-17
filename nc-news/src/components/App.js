@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Topics from './Topics';
 import Articles from './Articles';
 
 import 'bulma/css/bulma.css'
@@ -14,14 +15,7 @@ class App extends Component {
 
             <h1>NC NEWS</h1>
 
-            <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
-              <ul>
-                <li className="is-active"><a href="#" aria-current="page">All</a></li>
-                <li><a href="#">Coding</a></li>        
-                <li><a href="#">Football</a></li>
-                <li><a href="#">Cooking</a></li>
-              </ul>
-            </nav>
+            <Topics />
 
             <Articles />
 

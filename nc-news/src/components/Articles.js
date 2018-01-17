@@ -16,8 +16,7 @@ class Articles extends Component {
       <div className="articles">
         {this.state.articles.map((article, i) => (
           <Article article={article} key={i}/>
-        ))
-        }
+        ))}
       </div >
     )
   }
