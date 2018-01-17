@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import Topics from './Topics';
 import Articles from './Articles';
 
-import 'bulma/css/bulma.css'
+import 'bulma/css/bulma.css';
+import 'font-awesome/css/font-awesome.css';
 
 class App extends Component {
   render() {
