@@ -12,6 +12,13 @@ class ArticlesByTopic extends Component {
     this.fetchArticles(topic);
   }
 
+  componentWillReceiveProps(newProps) {
+    const oldTopic = this.props.match.params.topic;
+    const newTopic = newProps.match.params.topic;
+
+    if (newTopic !== oldTopic) this.fetchArticles(newTopic);
+  }
+
   render() {
     return (
       <div className="articles">

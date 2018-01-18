@@ -10,7 +10,7 @@ class ArticleBody extends Component {
   }
 
   componentDidMount() {
-    const articleId = this.props.match.params.article_id
+    const articleId = this.props.match.params.article_id;
     this.fetechArticleAndComments(articleId);
   }
 
@@ -22,7 +22,7 @@ class ArticleBody extends Component {
       <div className="article">
         <Article article={article} />
         <p style={{ border: 'green solid 2px' }}>{article.body}</p>
-        <Comments comments={comments}/>
+        <Comments comments={comments} />
       </div>
     );
   }
