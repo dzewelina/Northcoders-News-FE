@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 class Topics extends Component {
   state = {
@@ -10,12 +11,15 @@ class Topics extends Component {
   }
 
   render() {
+    const { topics } = this.state;
     return (
       <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
         <ul>
-          <li className="is-active"><a href="#" aria-current="page">All</a></li>
+          {/* <li className="is-active"><a href="#" aria-current="page">All</a></li> */}
           {this.state.topics.map((topic, i) => (
-            <li key={i}><a href="#">{topic.title}</a></li>
+            <li key={i}>
+              <NavLink to={`/topics/${topic.slug}`}>{topic.title}</NavLink>
+            </li>
           ))}
         </ul>
       </nav>
