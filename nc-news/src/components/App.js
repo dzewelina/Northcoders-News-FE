@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import Topics from './Topics';
 import Articles from './Articles';
+import ArticleBody from './ArticleBody';
 
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
@@ -21,6 +22,8 @@ class App extends Component {
               <Topics />
 
               <Route exact path='/' component={Articles} />
+
+              <Route exact path='/articles/:article_id' component={ArticleBody} />
 
             </div>
             <div className="column is-one-fifth"></div>
