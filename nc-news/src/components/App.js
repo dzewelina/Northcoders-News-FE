@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 
 import Topics from './Topics';
-import AppContent from './AppContent';
+import Articles from './Articles';
 
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
@@ -20,7 +20,7 @@ class App extends Component {
 
               <Topics />
 
-              <AppContent />
+              <Route exact path='/' component={Articles} />
 
             </div>
             <div className="column is-one-fifth"></div>
