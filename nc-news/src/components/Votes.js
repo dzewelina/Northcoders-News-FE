@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Votes = ({ votesNum }) => (
+const Votes = ({ votesNum, onDownVote, onUpVote }) => (
   <div>
-    <span className="icon">
+    <button className="icon" onClick={onDownVote}>
       <i className="fa fa-thumbs-o-down" aria-hidden="true"></i>
-    </span>
+    </button>
     <span>{votesNum}</span>
-    <span className="icon">
+    <button className="icon" onClick={onUpVote}>
       <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-    </span>
+    </button>
   </div>
 );
 

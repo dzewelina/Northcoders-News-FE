@@ -16,13 +16,17 @@ class ArticleBody extends Component {
 
   render() {
     const { article, comments } = this.state;
-    article['comments'] = comments.length;
-
     return (
       <div className="article">
-        <Article article={article} />
+        <Article
+          article={article}
+          votingFunction={this.votingFunction}
+        />
         <p style={{ border: 'green solid 2px' }}>{article.body}</p>
-        <Comments comments={comments} />
+        <Comments
+          comments={comments}
+          votingFunction={this.votingFunction2}
+        />
       </div>
     );
   }
@@ -34,6 +38,25 @@ class ArticleBody extends Component {
       .then(() => fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}/comments`))
       .then(buffer => buffer.json())
       .then(({ comments }) => this.setState({ comments }))
+  }
+
+  votingFunction = (articleId, vote) => {
+    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}?vote=${vote}`, { method: 'PUT' })
+      .then(buffer => buffer.json())
+      .then(newArticle => this.setState({ article: newArticle })
+      )
+  }
+
+  votingFunction2 = (commentId, vote) => {
+    return fetch(`https://northcoders-news-api.herokuapp.com/api/comments/${commentId}?vote=${vote}`, { method: 'PUT' })
+      .then(buffer => buffer.json())
+      .then(newComment => {
+        const newComments = this.state.comments.map(comment => {
+          if (comment._id === newComment._id) return newComment;
+          return comment;
+        })
+        this.setState({ comments: newComments })
+      })
   }
 
 }
