@@ -10,7 +10,7 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    fetchArticles()
+    fetchArticles('articles')
       .then(({ articles }) => this.setState({ articles }));
   }
 

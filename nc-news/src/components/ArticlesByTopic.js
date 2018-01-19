@@ -11,14 +11,14 @@ class ArticlesByTopic extends Component {
 
   componentDidMount() {
     const { topic } = this.props.match.params;
-    this.fetchArticlesByTopic(topic);
+    this.fetchArticlesByTopic('topics', topic);
   }
 
   componentWillReceiveProps(newProps) {
     const oldTopic = this.props.match.params.topic;
     const newTopic = newProps.match.params.topic;
 
-    if (newTopic !== oldTopic) this.fetchArticlesByTopic(newTopic);
+    if (newTopic !== oldTopic) this.fetchArticlesByTopic('topics', newTopic);
   }
 
   render() {
@@ -41,8 +41,8 @@ class ArticlesByTopic extends Component {
       .then(newArticles => this.setState({ articles: newArticles }))
   }
 
-  fetchArticlesByTopic = (topic) => {
-    fetchArticles(topic)
+  fetchArticlesByTopic = (type, param) => {
+    fetchArticles(type, param)
       .then(({ articles }) => this.setState({ articles }));
   }
 

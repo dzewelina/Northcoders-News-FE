@@ -5,6 +5,7 @@ import Topics from './Topics';
 import Articles from './Articles';
 import ArticleBody from './ArticleBody';
 import ArticlesByTopic from './ArticlesByTopic';
+import UserProfile from './UserProfile';
 
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
@@ -29,6 +30,8 @@ class App extends Component {
               <Route exact path='/articles/:article_id' component={ArticleBody} />
 
               <Route exact path='/topics/:topic' component={ArticlesByTopic} />
+
+              <Route exact path='/users/:username' component={UserProfile} />
 
             </div>
             <div className="column is-one-fifth"></div>
