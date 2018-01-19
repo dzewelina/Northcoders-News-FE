@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Article from './Article';
 import Comments from './Comments';
 
+import { fetechArticle, fetechComments, vote } from '../api';
+
 class ArticleBody extends Component {
   state = {
     article: {},
@@ -11,7 +13,10 @@ class ArticleBody extends Component {
 
   componentDidMount() {
     const articleId = this.props.match.params.article_id;
-    this.fetechArticleAndComments(articleId);
+    fetechArticle(articleId)
+      .then(article => this.setState({ article }))
+      .then(() => fetechComments(articleId))
+      .then(({ comments }) => this.setState({ comments }))
   }
 
   render() {
@@ -20,43 +25,26 @@ class ArticleBody extends Component {
       <div className="article">
         <Article
           article={article}
-          votingFunction={this.votingFunction}
+          voting={this.voteArticle}
         />
         <p style={{ border: 'green solid 2px' }}>{article.body}</p>
         <Comments
           comments={comments}
-          votingFunction={this.votingFunction2}
+          voting={this.voteComment}
         />
       </div>
     );
   }
 
-  fetechArticleAndComments = (articleId) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}`)
-      .then(buffer => buffer.json())
-      .then(article => this.setState({ article }))
-      .then(() => fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}/comments`))
-      .then(buffer => buffer.json())
-      .then(({ comments }) => this.setState({ comments }))
+  voteArticle = (type, id, voteOption) => {
+    vote(type, id, voteOption)
+      .then(newArticle => this.setState({ article: newArticle }))
   }
 
-  votingFunction = (articleId, vote) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}?vote=${vote}`, { method: 'PUT' })
-      .then(buffer => buffer.json())
-      .then(newArticle => this.setState({ article: newArticle })
-      )
-  }
-
-  votingFunction2 = (commentId, vote) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/comments/${commentId}?vote=${vote}`, { method: 'PUT' })
-      .then(buffer => buffer.json())
-      .then(newComment => {
-        const newComments = this.state.comments.map(comment => {
-          if (comment._id === newComment._id) return newComment;
-          return comment;
-        })
-        this.setState({ comments: newComments })
-      })
+  voteComment = (type, id, voteOption) => {
+    const data = this.state.comments;
+    vote(type, id, voteOption, data)
+      .then(newComments => this.setState({ comments: newComments }))
   }
 
 }

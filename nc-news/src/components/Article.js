@@ -1,19 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-
 import Votes from './Votes';
 
-const Article = ({ article, votingFunction }) => {
-  const onDownVote = votingFunction.bind(null, article._id, 'down');
-  const onUpVote = votingFunction.bind(null, article._id, 'up');
+const Article = ({ article, voting }) => {
   return (
     <div className="columns">
       <div className="column is-one-fifth">
         <Votes
           votesNum={article.votes}
-          onDownVote={onDownVote}
-          onUpVote={onUpVote}
+          voting={voting}
+          type='articles'
+          id={article._id}
         />
       </div>
       <div className="column">

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Article from './Article';
 
+import { fetchArticles, vote } from '../api';
+
 class ArticlesByTopic extends Component {
   state = {
     articles: []
@@ -9,14 +11,14 @@ class ArticlesByTopic extends Component {
 
   componentDidMount() {
     const { topic } = this.props.match.params;
-    this.fetchArticles(topic);
+    this.fetchArticlesByTopic(topic);
   }
 
   componentWillReceiveProps(newProps) {
     const oldTopic = this.props.match.params.topic;
     const newTopic = newProps.match.params.topic;
 
-    if (newTopic !== oldTopic) this.fetchArticles(newTopic);
+    if (newTopic !== oldTopic) this.fetchArticlesByTopic(newTopic);
   }
 
   render() {
@@ -26,29 +28,22 @@ class ArticlesByTopic extends Component {
           <Article
             article={article}
             key={i}
-            votingFunction={this.votingFunction}
+            voting={this.voteArticle}
           />
         ))}
       </div>
     );
   }
 
-  fetchArticles = (topic) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/topics/${topic}/articles`)
-      .then(buffer => buffer.json())
-      .then(({ articles }) => this.setState({ articles }))
+  voteArticle = (type, id, voteOption) => {
+    const data = this.state.articles;
+    vote(type, id, voteOption, data)
+      .then(newArticles => this.setState({ articles: newArticles }))
   }
 
-  votingFunction = (articleId, vote) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}?vote=${vote}`, { method: 'PUT' })
-      .then(buffer => buffer.json())
-      .then(newArticle => {
-        const newArticles = this.state.articles.map(article => {
-          if (article._id === newArticle._id) return newArticle;
-          return article;
-        })
-        this.setState({ articles: newArticles })
-      })
+  fetchArticlesByTopic = (topic) => {
+    fetchArticles(topic)
+      .then(({ articles }) => this.setState({ articles }));
   }
 
 }

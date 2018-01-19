@@ -2,11 +2,9 @@ import React from 'react';
 
 import Votes from './Votes';
 
-const Comments = ({ comments, votingFunction }) => (
+const Comments = ({ comments, voting }) => (
   <div className="comments">
     {comments.map((comment, i) => {
-      const onDownVote = votingFunction.bind(null, comment._id, 'down');
-      const onUpVote = votingFunction.bind(null, comment._id, 'up');
       return (
         <div className="columns" style={{ border: 'red solid 2px' }} key={i}>
           <div className="column">
@@ -16,8 +14,9 @@ const Comments = ({ comments, votingFunction }) => (
           <div className="column is-one-fifth">
             <Votes
               votesNum={comment.votes}
-              onDownVote={onDownVote}
-              onUpVote={onUpVote}
+              voting={voting}
+              type='comments'
+              id={comment._id}
             />
           </div>
         </div>

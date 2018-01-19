@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { fetchTopics } from '../api';
+
 class Topics extends Component {
   state = {
     topics: []
   }
 
   componentDidMount() {
-    this.fetchTopics();
+    fetchTopics()
+      .then(({ topics }) => this.setState({ topics }));
   }
 
   render() {
@@ -26,11 +29,6 @@ class Topics extends Component {
     )
   }
 
-  fetchTopics = () => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/topics`)
-      .then(buffer => buffer.json())
-      .then(({ topics }) => this.setState({ topics }))
-  }
 }
 
 export default Topics;

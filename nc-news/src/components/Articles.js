@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 
 import Article from './Article';
 
+import { fetchArticles, vote } from '../api';
+
 class Articles extends Component {
   state = {
     articles: []
   }
 
   componentDidMount() {
-    this.fetchArticles();
+    fetchArticles()
+      .then(({ articles }) => this.setState({ articles }));
   }
 
   render() {
@@ -18,29 +21,17 @@ class Articles extends Component {
           <Article
             article={article}
             key={i}
-            votingFunction={this.votingFunction}
+            voting={this.voteArticle}
           />
         ))}
       </div>
     );
   }
 
-  fetchArticles = () => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles`)
-      .then(buffer => buffer.json())
-      .then(({ articles }) => this.setState({ articles }))
-  }
-
-  votingFunction = (articleId, vote) => {
-    return fetch(`https://northcoders-news-api.herokuapp.com/api/articles/${articleId}?vote=${vote}`, { method: 'PUT' })
-      .then(buffer => buffer.json())
-      .then(newArticle => {
-        const newArticles = this.state.articles.map(article => {
-          if (article._id === newArticle._id) return newArticle;
-          return article;
-        })
-        this.setState({ articles: newArticles })
-      })
+  voteArticle = (type, id, voteOption) => {
+    const data = this.state.articles;
+    vote(type, id, voteOption, data)
+      .then(newArticles => this.setState({ articles: newArticles }))
   }
 
 }
