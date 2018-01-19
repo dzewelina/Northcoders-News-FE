@@ -18,7 +18,9 @@ const Article = ({ article, voting }) => {
         <h1>
           <NavLink to={`/articles/${article._id}`}>{article.title}</NavLink>
         </h1>
-        <p>added by {article.created_by} to {article.belongs_to}</p>
+        <p>
+          added by <NavLink to={`/users/${article.created_by}`}>{article.created_by}</NavLink> to <NavLink to={`/topics/${article.belongs_to}`}>{article.belongs_to}</NavLink>
+        </p>
         <p>{article.comments} comments</p>
       </div>
     </div>
