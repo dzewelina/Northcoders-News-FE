@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, NavLink } from 'react-router-dom';
 
 import Topics from './Topics';
 import Articles from './Articles';
@@ -18,7 +18,9 @@ class App extends Component {
             <div className="column is-one-fifth" ></div>
             <div className="column" style={{ border: 'black 2px solid' }}>
 
-              <h1>NC NEWS</h1>
+              <h1>
+                <NavLink to={'/'}>NC NEWS</NavLink>
+              </h1>
 
               <Topics />
 
