@@ -52,3 +52,16 @@ export const vote = (type, id, voteOption, data) => {
       });
     });
 };
+
+
+// Adding comment
+export const addComment = (articleId, body) => {
+  return fetch(`${API_URL}/api/articles/${articleId}/comments`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    })
+  })
+    .then(buffer => buffer.json())
+}

@@ -3,48 +3,39 @@ import React, { Component } from 'react';
 import Article from './Article';
 import Comments from './Comments';
 
-import { fetechArticle, fetechComments, vote } from '../api';
+import { fetechArticle, vote } from '../api';
 
 class ArticleBody extends Component {
   state = {
     article: {},
-    comments: []
+    loading: true
   }
 
   componentDidMount() {
     const articleId = this.props.match.params.article_id;
     fetechArticle(articleId)
-      .then(article => this.setState({ article }))
-      .then(() => fetechComments(articleId))
-      .then(({ comments }) => this.setState({ comments }))
+      .then(article => this.setState({ article, loading: false }))
   }
 
   render() {
-    const { article, comments } = this.state;
+    const { article, loading } = this.state;
     return (
-      <div className="article">
-        <Article
-          article={article}
-          voting={this.voteArticle}
-        />
-        <p style={{ border: 'green solid 2px' }}>{article.body}</p>
-        <Comments
-          comments={comments}
-          voting={this.voteComment}
-        />
-      </div>
+      loading
+        ? <img src='https://media.giphy.com/media/y1ZBcOGOOtlpC/200.gif' alt='Loading...' />
+        : <div className="article">
+          <Article
+            article={article}
+            voting={this.voteArticle}
+          />
+          <p style={{ border: 'green solid 2px' }}>{article.body}</p>
+          <Comments articleId={article._id} />
+        </div>
     );
   }
 
   voteArticle = (type, id, voteOption) => {
     vote(type, id, voteOption)
       .then(newArticle => this.setState({ article: newArticle }))
-  }
-
-  voteComment = (type, id, voteOption) => {
-    const data = this.state.comments;
-    vote(type, id, voteOption, data)
-      .then(newComments => this.setState({ comments: newComments }))
   }
 
 }
