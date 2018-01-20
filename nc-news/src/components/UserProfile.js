@@ -22,7 +22,7 @@ class UserProfile extends Component {
     return (
       <div className="columns">
         <div className="column is-one-fifth">
-          <img src={user.avatar_url} />
+          <img src={user.avatar_url} alt='User Avatar'/>
         </div>
         <div className="column">
           <h1>{user.name}</h1>
