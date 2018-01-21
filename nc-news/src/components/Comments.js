@@ -1,9 +1,10 @@
+import _ from 'underscore';
+
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 
-import Votes from './Votes';
+import Comment from './Comment';
 
-import { fetechComments, vote, addComment } from '../api';
+import { fetechComments, vote, addComment, deleteComment } from '../api';
 
 class Comments extends Component {
   state = {
@@ -28,24 +29,14 @@ class Comments extends Component {
           <input type='submit' value='Submit' />
         </form>
 
-        {comments.map((comment, i) => {
-          return (
-            <div className="columns" style={{ border: 'red solid 2px' }} key={i}>
-              <div className="column">
-                <p>{comment.body}</p>
-                <p>added by <NavLink to={`/users/${comment.created_by}`}>{comment.created_by}</NavLink> at {comment.created_at}</p>
-              </div>
-              <div className="column is-one-fifth">
-                <Votes
-                  votesNum={comment.votes}
-                  voting={this.voting}
-                  type='comments'
-                  id={comment._id}
-                />
-              </div>
-            </div>
-          )
-        })}
+        {comments.map((comment, i) => (
+          <Comment
+            key={i}
+            comment={comment}
+            voting={this.voteComment}
+            deleting={this.removeComment}
+          />
+        ))}
       </div>
     )
   }
@@ -56,11 +47,11 @@ class Comments extends Component {
       .then(newComments => this.setState({ comments: newComments }));
   }
 
-  handleComment = (event) => {
+  handleComment = event => {
     event.preventDefault();
 
     const newComment = event.target.elements.comment.value;
-    if (newComment.length === 0) return;
+    if (!newComment.length) return;
 
     const articleId = this.props.articleId;
     const body = { comment: newComment };
@@ -74,6 +65,18 @@ class Comments extends Component {
         })
       })
   }
+
+  removeComment = commentId => {
+    const { comments } = this.state
+    deleteComment(commentId)
+      .then(() => {
+        const updatedComments = _.reject(comments, (comment) => comment._id === commentId);
+
+        this.setState({ comments: updatedComments })
+      })
+  }
+
+
 
 }
 

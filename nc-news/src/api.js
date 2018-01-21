@@ -65,3 +65,9 @@ export const addComment = (articleId, body) => {
   })
     .then(buffer => buffer.json())
 }
+
+
+// Deleting comment
+export const deleteComment = commentId => {
+  return fetch(`${API_URL}/api/comments/${commentId}`, { method: 'DELETE'})
+}
