@@ -8,6 +8,7 @@ import { fetechArticle, vote } from '../api';
 class ArticleBody extends Component {
   state = {
     article: {},
+    comments: this.props.location.search.match(/=(\w+)/)[1] === 'true',
     loading: true
   }
 
@@ -17,8 +18,15 @@ class ArticleBody extends Component {
       .then(article => this.setState({ article, loading: false }))
   }
 
+  componentWillReceiveProps(newProps) {
+    const oldQuery = this.props.location.search.match(/=(\w+)/)[1];
+    const newQuery = newProps.location.search.match(/=(\w+)/)[1];
+
+    if (newQuery !== oldQuery) this.showComments();
+  }
+
   render() {
-    const { article, loading } = this.state;
+    const { article, comments, loading } = this.state;
     return (
       loading
         ? <img src='https://media.giphy.com/media/y1ZBcOGOOtlpC/200.gif' alt='Loading...' />
@@ -26,9 +34,10 @@ class ArticleBody extends Component {
           <Article
             article={article}
             voting={this.voteArticle}
+            showComments={this.showComments}
           />
           <p style={{ border: 'green solid 2px' }}>{article.body}</p>
-          <Comments articleId={article._id} />
+          {comments ? <Comments articleId={article._id} /> : <div></div>}
         </div>
     );
   }
@@ -36,6 +45,12 @@ class ArticleBody extends Component {
   voteArticle = (type, id, voteOption) => {
     vote(type, id, voteOption)
       .then(newArticle => this.setState({ article: newArticle }))
+  }
+
+  showComments = () => {
+    this.setState({
+      comments: !this.state.comments
+    })
   }
 
 }

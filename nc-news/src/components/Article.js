@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import Votes from './Votes';
 
-const Article = ({ article, voting }) => {
+const Article = ({ article, voting, showComments }) => {
   return (
     <div className="columns">
       <div className="column is-one-fifth">
@@ -16,12 +16,17 @@ const Article = ({ article, voting }) => {
       </div>
       <div className="column">
         <h1>
-          <NavLink to={`/articles/${article._id}`}>{article.title}</NavLink>
+          <NavLink to={`/articles/${article._id}?comments=false`}>{article.title}</NavLink>
         </h1>
         <p>
-          added by <NavLink to={`/users/${article.created_by}`}>{article.created_by}</NavLink> to <NavLink to={`/topics/${article.belongs_to}`}>{article.belongs_to}</NavLink>
+          added by
+          <NavLink to={`/users/${article.created_by}`}> {article.created_by} </NavLink>
+          to
+          <NavLink to={`/topics/${article.belongs_to}`}> {article.belongs_to}</NavLink>
         </p>
-        <p>{article.comments} comments</p>
+        <p>
+          <NavLink onClick={showComments} to={`/articles/${article._id}?comments=true`}>{article.comments} comments</NavLink>
+        </p>
       </div>
     </div>
   );
