@@ -18,6 +18,7 @@ export const fetchArticles = (type, param) => {
 export const fetechArticle = articleId => {
   return fetch(`/api/articles/${articleId}`)
     .then(buffer => buffer.json())
+    .then(res => res.article)
 };
 
 // COMMENTS FOR ARTICLE
@@ -67,5 +68,5 @@ export const addComment = (articleId, body) => {
 
 // Deleting comment
 export const deleteComment = commentId => {
-  return fetch(`/api/comments/${commentId}`, { method: 'DELETE'})
+  return fetch(`/api/comments/${commentId}`, { method: 'DELETE' })
 }
