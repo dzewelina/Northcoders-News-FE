@@ -40,10 +40,15 @@ export const vote = (type, id, voteOption, data) => {
     // state -> single article - object
     return fetch(`/api/articles/${id}?vote=${voteOption}`, { method: 'PUT' })
       .then(buffer => buffer.json())
+      .then(res => res.article)
   };
   // state -> array of articles or comments 
   return fetch(`/api/${type}/${id}?vote=${voteOption}`, { method: 'PUT' })
     .then(buffer => buffer.json())
+    .then(res => {
+      const key = Object.keys(res)[0];
+      return res[key];
+    })
     .then(newArticle => {
       return data.map(article => {
         if (article._id === newArticle._id) return newArticle;
