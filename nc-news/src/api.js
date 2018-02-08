@@ -1,36 +1,34 @@
-const API_URL = 'https://northcoders-news-api.herokuapp.com';
-
 // Fetching data
 // TOPICS
 export const fetchTopics = () => {
-  return fetch(`${API_URL}/api/topics`)
+  return fetch(`/api/topics`)
     .then(buffer => buffer.json())
 };
 
 // ARTICLES
 export const fetchArticles = (type, param) => {
   const url = param
-    ? `${API_URL}/api/${type}/${param}/articles` // fetch articles by type
-    : `${API_URL}/api/articles` // fetch all articles
+    ? `/api/${type}/${param}/articles` // fetch articles by type
+    : `/api/articles` // fetch all articles
   return fetch(url)
     .then(buffer => buffer.json())
 };
 
 // SINGLE ARTICLE
 export const fetechArticle = articleId => {
-  return fetch(`${API_URL}/api/articles/${articleId}`)
+  return fetch(`/api/articles/${articleId}`)
     .then(buffer => buffer.json())
 };
 
 // COMMENTS FOR ARTICLE
 export const fetechComments = articleId => {
-  return fetch(`${API_URL}/api/articles/${articleId}/comments`)
+  return fetch(`/api/articles/${articleId}/comments`)
     .then(buffer => buffer.json())
 };
 
 // USER
 export const fetchUser = username => {
-  return fetch(`${API_URL}/api/users/${username}`)
+  return fetch(`/api/users/${username}`)
     .then(buffer => buffer.json())
 };
 
@@ -39,11 +37,11 @@ export const fetchUser = username => {
 export const vote = (type, id, voteOption, data) => {
   if (!data) {
     // state -> single article - object
-    return fetch(`${API_URL}/api/articles/${id}?vote=${voteOption}`, { method: 'PUT' })
+    return fetch(`/api/articles/${id}?vote=${voteOption}`, { method: 'PUT' })
       .then(buffer => buffer.json())
   };
   // state -> array of articles or comments 
-  return fetch(`${API_URL}/api/${type}/${id}?vote=${voteOption}`, { method: 'PUT' })
+  return fetch(`/api/${type}/${id}?vote=${voteOption}`, { method: 'PUT' })
     .then(buffer => buffer.json())
     .then(newArticle => {
       return data.map(article => {
@@ -56,7 +54,7 @@ export const vote = (type, id, voteOption, data) => {
 
 // Adding comment
 export const addComment = (articleId, body) => {
-  return fetch(`${API_URL}/api/articles/${articleId}/comments`, {
+  return fetch(`/api/articles/${articleId}/comments`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: new Headers({
@@ -69,5 +67,5 @@ export const addComment = (articleId, body) => {
 
 // Deleting comment
 export const deleteComment = commentId => {
-  return fetch(`${API_URL}/api/comments/${commentId}`, { method: 'DELETE'})
+  return fetch(`/api/comments/${commentId}`, { method: 'DELETE'})
 }
