@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Article from './Article';
 import Comments from './Comments';
 
-import { fetechArticle, vote } from '../api';
+import { fetchArticle, vote } from '../api';
 
 class ArticleBody extends Component {
   state = {
@@ -14,7 +14,7 @@ class ArticleBody extends Component {
 
   componentDidMount() {
     const articleId = this.props.match.params.article_id;
-    fetechArticle(articleId)
+    fetchArticle(articleId)
       .then(article => this.setState({ article, loading: false }))
   }
 

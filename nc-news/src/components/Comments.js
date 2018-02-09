@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import Comment from './Comment';
 
-import { fetechComments, vote, addComment, deleteComment } from '../api';
+import { fetchComments, vote, addComment, deleteComment } from '../api';
 
 class Comments extends Component {
   state = {
@@ -14,7 +14,7 @@ class Comments extends Component {
 
   componentDidMount() {
     const articleId = this.props.articleId;
-    fetechComments(articleId)
+    fetchComments(articleId)
       .then(({ comments }) => this.setState({ comments }))
   }
 
