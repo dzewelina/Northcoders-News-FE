@@ -15,14 +15,14 @@ export const fetchArticles = (type, param) => {
 };
 
 // SINGLE ARTICLE
-export const fetechArticle = articleId => {
+export const fetchArticle = articleId => {
   return fetch(`/api/articles/${articleId}`)
     .then(buffer => buffer.json())
     .then(res => res.article)
 };
 
 // COMMENTS FOR ARTICLE
-export const fetechComments = articleId => {
+export const fetchComments = articleId => {
   return fetch(`/api/articles/${articleId}/comments`)
     .then(buffer => buffer.json())
 };
@@ -31,6 +31,7 @@ export const fetechComments = articleId => {
 export const fetchUser = username => {
   return fetch(`/api/users/${username}`)
     .then(buffer => buffer.json())
+    .then(res => res.user)
 };
 
 

@@ -18,15 +18,17 @@ class UserProfile extends Component {
   }
 
   render() {
-    const user = this.state.user;
+    const { user } = this.state;
     return (
-      <div className="columns">
-        <div className="column is-one-fifth">
-          <img src={user.avatar_url} alt='User Avatar'/>
-        </div>
-        <div className="column">
-          <h1>{user.name}</h1>
-          <h1>{user.username}</h1>
+      <div>
+        <div className="columns">
+          <div className="column is-one-fifth">
+            <img src={user.avatar_url} alt='User Avatar' />
+          </div>
+          <div className="column">
+            <h1>{user.name}</h1>
+            <h1>{user.username}</h1>
+          </div>
         </div>
         {this.state.articles.map((article, i) => (
           <Article
@@ -36,15 +38,15 @@ class UserProfile extends Component {
           />
         ))}
       </div>
-    )
+    );
   }
 
   voteArticle = (type, id, voteOption) => {
     const data = this.state.articles;
     vote(type, id, voteOption, data)
       .then(newArticles => this.setState({ articles: newArticles }))
-  }
+  };
 
-}
+};
 
 export default UserProfile;
