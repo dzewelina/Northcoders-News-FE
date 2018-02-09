@@ -18,7 +18,6 @@ class Topics extends Component {
     return (
       <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
         <ul>
-          {/* <li className="is-active"><a href="#" aria-current="page">All</a></li> */}
           {topics.map((topic, i) => (
             <li key={i}>
               <NavLink to={`/topics/${topic.slug}`}>{topic.title}</NavLink>

@@ -7,7 +7,7 @@ import Votes from './Votes';
 
 const Comment = ({ comment, voting, deleting }) => {
   return (
-    <div className="columns" style={{ border: 'red solid 2px' }}>
+    <div className="columns">
       <div className="column">
         <p>{comment.body}</p>
         <p>

@@ -2,12 +2,12 @@ import React from 'react';
 
 const Votes = ({ votesNum, voting, type, id }) => {
   return (
-    <div>
-      <button className="icon" onClick={() => voting(type, id, 'down')}>
+    <div className="votes">
+      <button className="icon" onClick={() => voting(type, id, 'down')} style={{display: 'block'}}>
         <i className="fa fa-thumbs-o-down" aria-hidden="true"></i>
       </button>
-      <span>{votesNum}</span>
-      {<button className="icon" onClick={() => voting(type, id, 'up')}>
+      <div>{votesNum}</div>
+      {<button className="icon" onClick={() => voting(type, id, 'up')} style={{display: 'block'}}>
         <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
       </button>}
     </div>

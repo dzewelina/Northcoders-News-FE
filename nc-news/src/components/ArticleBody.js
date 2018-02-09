@@ -36,7 +36,7 @@ class ArticleBody extends Component {
             voting={this.voteArticle}
             showComments={this.showComments}
           />
-          <p style={{ border: 'green solid 2px' }}>{article.body}</p>
+          <p>{article.body}</p>
           {comments ? <Comments articleId={article._id} /> : <div></div>}
         </div>
     );

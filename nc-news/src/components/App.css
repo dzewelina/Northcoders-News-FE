@@ -1,0 +1,33 @@
+header {
+  text-align: center;
+  font-size: 50px;
+  margin: 20px;
+}
+
+.article {
+  border-bottom: solid 1px green;
+  margin-bottom: 5px;
+  min-height: 90px;
+  position: relative;
+  align-items: center
+}
+
+.article:hover {
+  cursor: pointer;
+  background-color: rgb(241, 255, 241);
+}
+
+.articleTitle {
+  font-size: 20px;
+}
+
+a {
+  color: black
+}
+
+.votes {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  align-items: center
+}

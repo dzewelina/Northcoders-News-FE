@@ -9,6 +9,7 @@ import UserProfile from './UserProfile';
 
 import 'bulma/css/bulma.css';
 import 'font-awesome/css/font-awesome.css';
+import './App.css';
 
 class App extends Component {
   render() {
@@ -17,11 +18,11 @@ class App extends Component {
         <div className="App">
           <div className="columns">
             <div className="column is-one-fifth" ></div>
-            <div className="column" style={{ border: 'black 2px solid' }}>
+            <div className="column">
 
-              <h1>
+              <header>
                 <NavLink to={'/'}>NC NEWS</NavLink>
-              </h1>
+              </header>
 
               <Topics />
 

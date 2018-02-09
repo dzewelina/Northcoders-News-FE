@@ -5,7 +5,7 @@ import Votes from './Votes';
 
 const Article = ({ article, voting, showComments }) => {
   return (
-    <div className="columns">
+    <div className="columns article">
       <div className="column is-one-fifth">
         <Votes
           votesNum={article.votes}
@@ -15,7 +15,7 @@ const Article = ({ article, voting, showComments }) => {
         />
       </div>
       <div className="column">
-        <h1>
+        <h1 className="articleTitle">
           <NavLink to={`/articles/${article._id}?comments=false`}>{article.title}</NavLink>
         </h1>
         <p>
