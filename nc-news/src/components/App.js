@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter, NavLink } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 
+import SafeLink from './SafeLink';
 import Topics from './Topics';
 import Articles from './Articles';
 import ArticleBody from './ArticleBody';
@@ -21,7 +22,7 @@ class App extends Component {
             <div className="column">
 
               <header>
-                <NavLink to={'/'}>NC NEWS</NavLink>
+                <SafeLink to={'/'}>NC NEWS</SafeLink>
               </header>
 
               <Topics />

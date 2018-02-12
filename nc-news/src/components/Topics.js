@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 
+import SafeLink from './SafeLink';
 import { fetchTopics } from '../api';
 
 class Topics extends Component {
@@ -20,7 +20,7 @@ class Topics extends Component {
         <ul>
           {topics.map((topic, i) => (
             <li key={i}>
-              <NavLink to={`/topics/${topic.slug}`}>{topic.title}</NavLink>
+              <SafeLink to={`/topics/${topic.slug}`}>{topic.title}</SafeLink>
             </li>
           ))}
         </ul>

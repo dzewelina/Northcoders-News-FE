@@ -1,8 +1,8 @@
 import moment from 'moment';
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
+import SafeLink from './SafeLink';
 import Votes from './Votes';
 
 const Comment = ({ comment, voting, deleting }) => {
@@ -12,7 +12,7 @@ const Comment = ({ comment, voting, deleting }) => {
         <p>{comment.body}</p>
         <p>
           added {moment(comment.created_at).fromNow()} by
-          <NavLink to={`/users/${comment.created_by}`}> {comment.created_by}</NavLink>
+          <SafeLink to={`/users/${comment.created_by}`}> {comment.created_by}</SafeLink>
         </p>
       </div>
       <div className="column is-one-fifth">

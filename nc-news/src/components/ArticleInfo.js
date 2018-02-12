@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import SafeLink from './SafeLink';
 
 import Votes from './Votes';
 
@@ -16,15 +17,15 @@ const ArticleInfo = ({ article, voting, showComments, navLink }) => {
       </div>
       <div className="column">
         <h1 className="articleTitle">
-          <Link to={`/articles/${article._id}?comments=false`}>{article.title}</Link>
+          <SafeLink to={`/articles/${article._id}?comments=false`}>{article.title}</SafeLink>
         </h1>
         <p>
           added by
-          <Link to={`/users/${article.created_by}`}> {article.created_by} </Link>
+          <SafeLink to={`/users/${article.created_by}`}> {article.created_by} </SafeLink>
           to
-          <Link to={`/topics/${article.belongs_to}`}> {article.belongs_to}</Link>
+          <SafeLink to={`/topics/${article.belongs_to}`}> {article.belongs_to}</SafeLink>
         </p>
-          {navLink ? <Link to={`/articles/${article._id}?comments=true`}>{article.comments} comments</Link> : <p onClick={showComments}>{article.comments} comments</p>}
+          {navLink ? <SafeLink to={`/articles/${article._id}?comments=true`}>{article.comments} comments</SafeLink> : <p onClick={showComments}>{article.comments} comments</p>}
       </div>
     </div>
   );
