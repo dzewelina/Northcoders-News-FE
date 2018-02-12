@@ -25,6 +25,7 @@ export const fetchArticle = articleId => {
 export const fetchComments = articleId => {
   return fetch(`/api/articles/${articleId}/comments`)
     .then(buffer => buffer.json())
+    .then(res => res.comments)
 };
 
 // USER
@@ -69,10 +70,16 @@ export const addComment = (articleId, body) => {
     })
   })
     .then(buffer => buffer.json())
+    .then(res => res.comment)
+    .then(comment => {
+      const updatedArticle = fetchArticle(articleId);
+      return Promise.all([updatedArticle, comment]);
+    });
 }
 
 
 // Deleting comment
-export const deleteComment = commentId => {
+export const deleteComment = (commentId, articleId) => {
   return fetch(`/api/comments/${commentId}`, { method: 'DELETE' })
+    .then(() => fetchArticle(articleId));
 }

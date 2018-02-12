@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Votes from './Votes';
 
-const ArticleInfo = ({ article, voting, showComments }) => {
+const ArticleInfo = ({ article, voting, showComments, navLink }) => {
   return (
     <div className="columns article">
       <div className="column is-one-fifth">
@@ -16,17 +16,15 @@ const ArticleInfo = ({ article, voting, showComments }) => {
       </div>
       <div className="column">
         <h1 className="articleTitle">
-          <NavLink to={`/articles/${article._id}?comments=false`}>{article.title}</NavLink>
+          <Link to={`/articles/${article._id}?comments=false`}>{article.title}</Link>
         </h1>
         <p>
           added by
-          <NavLink to={`/users/${article.created_by}`}> {article.created_by} </NavLink>
+          <Link to={`/users/${article.created_by}`}> {article.created_by} </Link>
           to
-          <NavLink to={`/topics/${article.belongs_to}`}> {article.belongs_to}</NavLink>
+          <Link to={`/topics/${article.belongs_to}`}> {article.belongs_to}</Link>
         </p>
-        <p>
-          <NavLink onClick={showComments} to={`/articles/${article._id}?comments=true`}>{article.comments} comments</NavLink>
-        </p>
+          {navLink ? <Link to={`/articles/${article._id}?comments=true`}>{article.comments} comments</Link> : <p onClick={showComments}>{article.comments} comments</p>}
       </div>
     </div>
   );

@@ -22,8 +22,7 @@ const Comment = ({ comment, voting, deleting }) => {
           type='comments'
           id={comment._id}
         />
-        {comment.created_by === 'northcoder' ? <button onClick={() => deleting(comment._id)}>DELETE</button> : <p></p>
-        }
+        {comment.created_by === 'northcoder' && <button onClick={() => deleting(comment._id)}>DELETE</button>}
       </div>
     </div>
   )
