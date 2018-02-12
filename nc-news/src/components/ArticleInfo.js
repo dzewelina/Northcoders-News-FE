@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import Votes from './Votes';
 
-const Article = ({ article, voting, showComments }) => {
+const ArticleInfo = ({ article, voting, showComments }) => {
   return (
     <div className="columns article">
       <div className="column is-one-fifth">
@@ -32,4 +32,4 @@ const Article = ({ article, voting, showComments }) => {
   );
 }
 
-export default Article;
+export default ArticleInfo;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Article from './Article';
+import ArticleInfo from './ArticleInfo';
 
 import { fetchArticles, vote } from '../api';
 
@@ -18,7 +18,7 @@ class Articles extends Component {
     return (
       <div className="articles">
         {this.state.articles.map((article, i) => (
-          <Article
+          <ArticleInfo
             article={article}
             key={i}
             voting={this.voteArticle}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Article from './Article';
+import ArticleInfo from './ArticleInfo';
 import Comments from './Comments';
 
 import { fetchArticle, vote } from '../api';
@@ -31,7 +31,7 @@ class ArticleBody extends Component {
       loading
         ? <img src='https://media.giphy.com/media/y1ZBcOGOOtlpC/200.gif' alt='Loading...' />
         : <div className="article">
-          <Article
+          <ArticleInfo
             article={article}
             voting={this.voteArticle}
             showComments={this.showComments}

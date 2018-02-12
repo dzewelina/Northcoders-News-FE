@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Article from './Article';
+import ArticleInfo from './ArticleInfo';
 import { fetchUser, fetchArticles, vote } from '../api';
 
 class UserProfile extends Component {
@@ -31,7 +31,7 @@ class UserProfile extends Component {
           </div>
         </div>
         {this.state.articles.map((article, i) => (
-          <Article
+          <ArticleInfo
             article={article}
             key={i}
             voting={this.voteArticle}
