@@ -35,6 +35,7 @@ class UserProfile extends Component {
             article={article}
             key={i}
             voting={this.voteArticle}
+            navLink={true}
           />
         ))}
       </div>
