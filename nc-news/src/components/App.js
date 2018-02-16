@@ -22,7 +22,7 @@ class App extends Component {
             <div className="column">
 
               <header>
-                <SafeLink to={'/'}>NC NEWS</SafeLink>
+                <SafeLink to={'/'}>NORTHCODERS NEWS</SafeLink>
               </header>
 
               <Topics />
