@@ -63,7 +63,9 @@ class ArticleBody extends Component {
             </div>
 
             <div>
-              {comments.map((comment, i) => (
+              {comments
+              .sort((a, b) => a.created_at - b.created_at)
+              .map((comment, i) => (
                 <Comment
                   key={i}
                   comment={comment}
@@ -72,7 +74,7 @@ class ArticleBody extends Component {
                 />
               ))}
             </div>
-            
+
           </div>}
         </div>
     );
