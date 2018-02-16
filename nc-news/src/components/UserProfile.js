@@ -22,14 +22,16 @@ class UserProfile extends Component {
     return (
       <div>
         <div className="columns">
-          <div className="column is-one-fifth">
+          <div className="column is-one-quarter">
             <img src={user.avatar_url} alt='User Avatar' />
           </div>
-          <div className="column">
-            <h1>{user.name}</h1>
+          
+          <div className="column user">
+            <h1><b>{user.name}</b></h1>
             <h1>{user.username}</h1>
           </div>
         </div>
+
         {this.state.articles.map((article, i) => (
           <ArticleInfo
             article={article}

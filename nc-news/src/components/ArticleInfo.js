@@ -15,17 +15,20 @@ const ArticleInfo = ({ article, voting, showComments, navLink }) => {
           id={article._id}
         />
       </div>
+
       <div className="column">
         <h1 className="articleTitle">
           <SafeLink to={`/articles/${article._id}?comments=false`}>{article.title}</SafeLink>
         </h1>
-        <p>
+
+        {navLink ? <SafeLink to={`/articles/${article._id}?comments=true`}>{article.comments} comments</SafeLink> : <p onClick={showComments}>{article.comments} comments</p>}
+
+        <p className="author">
           added by
           <SafeLink to={`/users/${article.created_by}`}> {article.created_by} </SafeLink>
           to
           <SafeLink to={`/topics/${article.belongs_to}`}> {article.belongs_to}</SafeLink>
-        </p>
-          {navLink ? <SafeLink to={`/articles/${article._id}?comments=true`}>{article.comments} comments</SafeLink> : <p onClick={showComments}>{article.comments} comments</p>}
+        </p>        
       </div>
     </div>
   );

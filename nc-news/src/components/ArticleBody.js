@@ -34,31 +34,45 @@ class ArticleBody extends Component {
     return (
       loading
         ? <img src='https://media.giphy.com/media/y1ZBcOGOOtlpC/200.gif' alt='Loading...' />
-        : <div className="article">
-          <ArticleInfo
-            article={article}
-            voting={this.voteArticle}
-            showComments={this.showComments}
-          />
+        : <div>
+          <div className="article">
+            <ArticleInfo
+              article={article}
+              voting={this.voteArticle}
+              showComments={this.showComments}
+            />
 
-          <p>{article.body}</p>
+            <p className="articleBody"><b>{article.body}</b></p>
+          </div>
 
           {commentsVisible && <div className="comments">
-            <form onSubmit={this.handleComment}>
-              <label>
-                <textarea name='comment' placeholder='Add comment...' />
-              </label>
-              <input type='submit' value='Submit' />
-            </form>
 
-            {comments.map((comment, i) => (
-              <Comment
-                key={i}
-                comment={comment}
-                voting={this.voteComment}
-                deleting={this.removeComment}
-              />
-            ))}
+            <div className="newComment">
+              <form onSubmit={this.handleComment}>
+                <div className="columns">
+                  <div className="column">
+                    <label>
+                      <textarea name='comment' placeholder='Add comment...' />
+                    </label>
+                  </div>
+                  <div className="column is-one-fifth add">
+                    <input type='submit' value='Add' />
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              {comments.map((comment, i) => (
+                <Comment
+                  key={i}
+                  comment={comment}
+                  voting={this.voteComment}
+                  deleting={this.removeComment}
+                />
+              ))}
+            </div>
+            
           </div>}
         </div>
     );
@@ -74,7 +88,7 @@ class ArticleBody extends Component {
     vote(type, id, voteOption, data)
       .then(newComments => this.setState({ comments: newComments }));
   };
-  
+
   showComments = () => {
     this.setState({
       commentsVisible: !this.state.commentsVisible

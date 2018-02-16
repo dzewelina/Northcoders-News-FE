@@ -16,15 +16,13 @@ class Topics extends Component {
   render() {
     const { topics } = this.state;
     return (
-      <nav className="breadcrumb is-centered" aria-label="breadcrumbs">
-        <ul>
-          {topics.map((topic, i) => (
-            <li key={i}>
-              <SafeLink to={`/topics/${topic.slug}`}>{topic.title}</SafeLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <ul className="topics">
+        {topics.map((topic, i) => (
+          <li key={i}>
+            <SafeLink to={`/topics/${topic.slug}`}>{topic.title}</SafeLink>
+          </li>
+        ))}
+      </ul>
     )
   }
 
