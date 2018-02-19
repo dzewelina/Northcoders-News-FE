@@ -82,3 +82,8 @@ textarea {
   margin-bottom: 50px;
   border: solid green 1px
 }
+
+.comments {
+  cursor: pointer;
+  color: green
+}

@@ -21,7 +21,7 @@ const ArticleInfo = ({ article, voting, showComments, navLink }) => {
           {navLink ? <SafeLink to={`/articles/${article._id}?comments=false`}>{article.title}</SafeLink> : article.title}
         </h1>
 
-        {navLink ? <SafeLink to={`/articles/${article._id}?comments=true`}>{article.comments} comments</SafeLink> : <p onClick={showComments}>{article.comments} comments</p>}
+        {navLink ? <SafeLink to={`/articles/${article._id}?comments=true`}>{article.comments} comments</SafeLink> : <p className="comments" onClick={showComments}>{article.comments} comments</p>}
 
         <p className="author">
           added by
